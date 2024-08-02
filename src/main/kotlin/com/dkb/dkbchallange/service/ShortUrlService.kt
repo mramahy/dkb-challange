@@ -1,16 +1,18 @@
 package com.dkb.dkbchallange.service
 
+import com.dkb.dkbchallange.repository.InMemoryUrlRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.env.Environment
 import org.springframework.stereotype.Service
 import java.nio.charset.StandardCharsets
 import java.security.MessageDigest
 import java.util.*
-import java.util.concurrent.ConcurrentHashMap
 
 @Service
-class ShortUrlService @Autowired constructor(private val environment: Environment){
-    private val urls = ConcurrentHashMap<String, String>()
+class ShortUrlService @Autowired constructor(
+    private val environment: Environment,
+    private val urlRepository: InMemoryUrlRepository
+){
 
     private val baseUrl: String
         get() {
@@ -19,12 +21,12 @@ class ShortUrlService @Autowired constructor(private val environment: Environmen
         }
 
     fun getShortUrl(id: String): String? {
-        return urls[id]
+        return urlRepository.getUrl(id)
     }
 
     fun saveUrl(url: String): String {
         val id = hashUrl(url)
-        urls[id] = url
+        urlRepository.saveUrl(id, url)
         return "$baseUrl$id"
     }
 
