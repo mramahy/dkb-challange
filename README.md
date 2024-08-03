@@ -12,8 +12,6 @@ This project is a URL shortening service built with Kotlin and Spring Boot. It p
 - `src/main/kotlin/com/dkb/dkbchallange/`: Contains the main application and service classes.
 - `src/main/kotlin/com/dkb/dkbchallange/rest/`: Contains the REST controller for handling HTTP requests.
 - `src/main/kotlin/com/dkb/dkbchallange/repository/`: Contains the repository interface and its implementation for URL storage.
-- `src/main/kotlin/com/dkb/dkbchallange/util/`: Contains utility classes.
-
 ## Getting Started
 
 ### Prerequisites
