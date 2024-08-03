@@ -1,9 +1,9 @@
 package com.dkb.dkbchallange.repository
 
-import org.springframework.stereotype.Repository
+import org.springframework.stereotype.Component
 import java.util.concurrent.ConcurrentHashMap
 
-@Repository
+@Component
 class InMemoryUrlRepository {
     private val urls = ConcurrentHashMap<String, String>()
 

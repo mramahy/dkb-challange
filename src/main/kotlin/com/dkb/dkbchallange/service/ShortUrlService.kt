@@ -2,22 +2,21 @@ package com.dkb.dkbchallange.service
 
 import com.dkb.dkbchallange.repository.InMemoryUrlRepository
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.core.env.Environment
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import java.nio.charset.StandardCharsets
 import java.security.MessageDigest
 import java.util.*
 
 @Service
-class ShortUrlService @Autowired constructor(
-    private val environment: Environment,
-    private val urlRepository: InMemoryUrlRepository
-){
+class ShortUrlService @Autowired constructor(private val urlRepository: InMemoryUrlRepository){
+
+    @Value("\${local.server.port}")
+    val port: String? = null
 
     private val baseUrl: String
         get() {
-            val port = environment.getProperty("local.server.port")
-            return "http://localhost:$port/"
+            return "http://localhost:$port/url/"
         }
 
     fun getShortUrl(id: String): String? {

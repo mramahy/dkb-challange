@@ -1,22 +1,22 @@
 package com.dkb.dkbchallange
 
 import org.junit.jupiter.api.BeforeEach
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.web.server.LocalServerPort
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(properties = ["local.server.port=8080"])
 abstract class DkbAbstractTest {
 
     protected val url = "http://example.com"
 
-    @LocalServerPort
-    protected var port: Int = 0
+    @Value("\${local.server.port}")
+    protected var port: Int = 8080
 
     protected lateinit var baseUrl : String
 
     @BeforeEach
     fun setUp() {
-        baseUrl = "http://localhost:$port/"
+        baseUrl = "http://localhost:$port/url"
     }
 
 }

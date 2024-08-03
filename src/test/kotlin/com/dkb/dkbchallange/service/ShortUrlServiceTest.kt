@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(properties = ["local.server.port=8080"], webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT )
 class ShortUrlServiceTest : DkbAbstractTest() {
 
     @Autowired
@@ -17,7 +17,7 @@ class ShortUrlServiceTest : DkbAbstractTest() {
     @Test
     fun `test saveUrl saves the URL and returns the correct short URL`() {
         val shortUrl = shortUrlService.saveUrl(url)
-        val id = shortUrl.removePrefix(baseUrl)
+        val id = shortUrl.removePrefix("$baseUrl/")
 
         assertEquals(/* expected = */ url, /* actual = */ shortUrlService.getShortUrl(id))
     }

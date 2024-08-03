@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import kotlin.test.Test
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(properties = ["local.server.port=8080"], webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 class ShortUrlControllerIT : DkbAbstractTest() {
 
     @Autowired
